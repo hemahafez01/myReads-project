@@ -5,16 +5,16 @@ import bookDisplay from "./bookDisplay";
 
 
 const bookShelve = ({header, books, updateBookShelve}) => {
-                <div className="bookshelf">
+                return (<div className="bookshelf">
                    <h2 className="bookshelf-title">{header}</h2>
                     <div className="bookshelf-books">
 						<bookDisplay
-							books= {books}
-							updateBookShelve= {updateBookShelve}
+							books={books}
+							updateBookShelve={updateBookShelve}
 						/>
                     </div>
 				</div>
-};
+)};
 
 bookShelve.PropTypes = {
 	header: PropTypes.string.isRequired,

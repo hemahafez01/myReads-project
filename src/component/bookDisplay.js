@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import book from "./book";
 
 const bookDisplay = ({books, updateBookShelve}) => {
-                    <ol className="books-grid">
+                    return (<ol className="books-grid">
                       {books.map((book, index) => { 
-							<book
+							return (<book
 								book={book}
 								//key= {index}
 								updateBookShelve={updateBookShelve}
-								/> })}
-					</ol>
+								/> );})}
+					</ol> )
 }
 
 bookDisplay.PropTypes = {

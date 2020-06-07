@@ -1,6 +1,6 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import * as BooksAPI from './BooksAPI.js'
 import './App.css'
 import myReadsPage from './component/myReadsPage'
 import searchPage from './component/searchPage'
@@ -16,7 +16,7 @@ class BooksApp extends React.Component {
   }
 
   getBookShelve = () => {
-    BooksAPI.getall().then(bookshelve => this.setState({ bookshelve }));
+    BooksAPI.getAll().then(bookshelve => this.setState({ bookshelve }));
   }
 
   searchBook = query => {
@@ -52,37 +52,33 @@ class BooksApp extends React.Component {
 
   render() {
     return (
+     <Router>
       <div className="app">
         <Route
-          exactpath= "/"
-          render = {() => 
-            <myReadsPage
-              bookShelve= {this.state.bookShelve}
-              updateBookShelve= {(book, shelf) => {
-               this.updateBookShelve(book, shelf);
-              }}
-             />}
+          exactpath="/"
+          render={() => 
+            < myReadsPage bookShelve={this.state.bookShelve} updateBookShelve={(book, shelf) => this.updateBookShelve(book, shelf)} /> }
         />
       <Route
-        path= "/search"
-        render = {() => 
+        path="/search"
+        render={() => 
           <searchPage
-             books= {this.state.books}
-             searchBook = { query => {
+             books={this.state.books}
+             searchBook={ query => {
                            this.searchBook(query);
                           }}
-             updateBookShelve= {(book, shelf) => {
+             updateBookShelve={(book, shelf) => {
               this.updateBookShelve(book, shelf);
                                }}
-             clearSearchPage= {() => {
+             clearSearchPage={() => {
               this.clearSearchPage();
              }}
            />}
       />
       </div>
-       
+     </Router>
     );
   }
 }
 
-export default BooksApp
+export default BooksApp;

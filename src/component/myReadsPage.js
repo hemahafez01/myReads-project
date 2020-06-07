@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 import bookShelf from "./bookShelf";
+
 
 const myReadsPage= ({bookShelve, updateBookShelve}) => {
 		const read = bookShelve.filter(book => book.shelf === "read");
@@ -42,8 +43,8 @@ const myReadsPage= ({bookShelve, updateBookShelve}) => {
           )
 };
 
-myReadsPage.propTypes = {
-	bookShelf: PropTypes.array.isRequired,
+myReadsPage.PropTypes = {
+	bookShelve: PropTypes.array.isRequired,
 	updateBookShelve: PropTypes.func.isRequired
 };
 
