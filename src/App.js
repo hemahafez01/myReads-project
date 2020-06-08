@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as BooksAPI from './BooksAPI.js'
 import './App.css'
-import myReadsPage from './component/myReadsPage'
-import searchPage from './component/searchPage'
+import MyReadsPage from './component/MyReadsPage'
+import SearchPage from './component/SearchPage'
 
 class BooksApp extends React.Component {
   state = {
@@ -12,11 +12,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-   this.getBookShelve(); 
-  }
-
-  getBookShelve = () => {
-    BooksAPI.getAll().then(bookshelve => this.setState({ bookshelve }));
+   BooksAPI.getAll().then(books => this.setState({ books }));
   }
 
   searchBook = query => {
@@ -35,16 +31,23 @@ class BooksApp extends React.Component {
   }
 
   updateBookShelve= (book, shelf) => {
-   if (book.shelf !== shelf ) {
-    BooksAPI.update(book, shelf).then(response => {
-     book.shelf = shelf;
+   let books=this.state.books;
+    BooksAPI.update(book, shelf).then(() => {
+      BooksAPI.get(book.id).then(book => {
+      let newBooks=books.filter(b => b.id !== book.id);
+        this.setState({ books: [...newBooks, book]
+      })
+      })
+    })
+  }
+     /*book.shelf = shelf;
      this.getBookShelve();
      this.setState(state => ({
      book: state.books.filter(b => b.id !== book.id).concat([book])
      }));
     });
    }
-  };
+  };*/
 
   clearSearchPage = () => {
    this.setState({books: [] }); 
@@ -57,12 +60,12 @@ class BooksApp extends React.Component {
         <Route
           exactpath="/"
           render={() => 
-            < myReadsPage bookShelve={this.state.bookShelve} updateBookShelve={(book, shelf) => this.updateBookShelve(book, shelf)} /> }
+            < MyReadsPage bookShelve={this.state.bookShelve} updateBookShelve={(book, shelf) => this.updateBookShelve(book, shelf)} /> }
         />
       <Route
         path="/search"
         render={() => 
-          <searchPage
+          <SearchPage
              books={this.state.books}
              searchBook={ query => {
                            this.searchBook(query);
