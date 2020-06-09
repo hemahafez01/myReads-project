@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import BookDisplay from "./BookDisplay";
 
@@ -31,7 +31,7 @@ class SearchPage extends Component {
     return (
 			<div className="search-books">
 				<div className="search-books-bar">
-					<link to="/" className="close-search">Close</link>
+					<Link to="/" className="close-search">Close</Link>
 					<div className="search-books-input-wrapper">
 						<input 
 							type="text"

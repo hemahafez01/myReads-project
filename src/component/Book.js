@@ -13,18 +13,18 @@ return (
         <div className="book-top">
           <div className="book-cover" 
               style={
-              { width: 128, height: 193, backgroundImage: `url("${(Book.imageLinks && Book.imageLinks.thumbnail) || default_img}")` 
+              { width: 128, height: 193, backgroundImage: `url("${(book.imageLinks.smallThumbnail && book.imageLinks.thumbnail) || default_img}")` 
               }}>
           </div>
           <div className="book-shelf-changer">
               <BookShelfChanger
-                  book={Book}
+                  book={book}
                   updateBookShelve={updateBookShelve}
                   />
           </div>
 		</div>
-		<div className="book-title">{Book.title}</div>
-		<div className="book-authors">{Book.authors ? Book.authors.join(", ") : " " }</div>
+		<div className="book-title">{book.title}</div>
+		<div className="book-authors">{book.authors ? book.authors.join(", ") : " " }</div>
 	</div>
 </li>
   );

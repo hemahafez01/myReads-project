@@ -12,7 +12,9 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-   BooksAPI.getAll().then(books => this.setState({ books }));
+   BooksAPI.getAll().then(books => {
+                          console.log(books)
+                          this.setState({ books })});
   }
 
   searchBook = query => {
@@ -60,7 +62,7 @@ class BooksApp extends React.Component {
         <Route
           exactpath="/"
           render={() => 
-            < MyReadsPage bookShelve={this.state.bookShelve} updateBookShelve={(book, shelf) => this.updateBookShelve(book, shelf)} /> }
+            < MyReadsPage bookShelve={this.state.books} updateBookShelve={(book, shelf) => this.updateBookShelve(book, shelf)} /> }
         />
       <Route
         path="/search"
