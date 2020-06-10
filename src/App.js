@@ -5,22 +5,23 @@ import './App.css'
 import MyReadsPage from './component/MyReadsPage'
 import SearchPage from './component/SearchPage'
 
+//function check(test){ console.log(test)};
+
 class BooksApp extends React.Component {
   state = {
     books: [],
     bookShelve: []
   }
-
+  
   componentDidMount() {
-   BooksAPI.getAll().then(books => {
-                          console.log(books)
+   BooksAPI.getAll().then(books => { console.log(books)
                           this.setState({ books })});
   }
 
-  searchBook = query => {
-    BooksAPI.search(query, 20).then(
+  searchBook = (query) => {
+    BooksAPI.search(query, 30).then(
       books => {
-        if (!Array.isArray(books)) books=[];
+        if (!Array.isArray(books)) {books=[]};
         let bookShelve= this.state.bookShelve;
         books.map(book => {
           let _book = bookShelve.find(item => item.id === book.id);
@@ -69,7 +70,7 @@ class BooksApp extends React.Component {
         render={() => 
           <SearchPage
              books={this.state.books}
-             searchBook={ query => {
+             searchBook={ (query) => {
                            this.searchBook(query);
                           }}
              updateBookShelve={(book, shelf) => {

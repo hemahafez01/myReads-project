@@ -9,6 +9,7 @@ const MyReadsPage= ({bookShelve, updateBookShelve}) => {
 		const read = bookShelve.filter(book => book.shelf === "read");
 		const wantToRead = bookShelve.filter(book => book.shelf === "wantToRead");
 		const currentlyReading = bookShelve.filter(book => book.shelf === "currentlyReading");
+  		const shelves=[{title:'Read', books: read}, {title:'Currently Reading', books: currentlyReading}, {title:'Want To Read', books: wantToRead}];
 
 		return (
 			<div className="list-books">
@@ -17,27 +18,21 @@ const MyReadsPage= ({bookShelve, updateBookShelve}) => {
 				</div>
 				<div className="list-books-content">
 					<div>
+                      {shelves.map((shelf, index) => { return(
 						<BookShelf
-							header={"Read"}
-							books={read}
+							header={shelf.title}
+							books={shelf.books}
 							updateBookShelve={updateBookShelve}
+							key={index}
 						/>
+                      )})}
 
-						<BookShelf
-							header={"Want To Read"}
-							books={wantToRead}
-							updateBookShelve={updateBookShelve}
-						/>
 
-						<BookShelf
-							header={"Currently Reading"}
-							books={currentlyReading}
-							updateBookShelve={updateBookShelve}
-						/>
+
 					</div>
 				</div>
 				<div className="open-search">
-					<Link to="/search">Add a book</Link>
+					<Link to="/search">Search</Link>
 				</div>
 			</div>
           )
